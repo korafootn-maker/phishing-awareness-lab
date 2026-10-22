@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مختبر التوعية بالتصيد الإلكتروني</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #172033;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      max-width: 420px;
+      margin: 60px auto;
+      padding: 28px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px #0001;
+    }
+    .tag {
+      color: #b45309;
+      background: #fef3c7;
+      padding: 8px 12px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    h1 { color: #166534; }
+    p { line-height: 1.9; }
+    button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 10px;
+      background: #15803d;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    #lesson {
+      display: none;
+      text-align: right;
+      margin-top: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="tag">تجربة توعوية آمنة</span>
+    <h1>هل تستطيع اكتشاف التصيّد؟</h1>
+    <p>
+      اختبر قدرتك على التعرّف على علامات الرسائل
+      والصفحات المشبوهة. هذه محاكاة تعليمية،
+      ولا تطلب أي كلمة مرور أو رمز تحقق.
+    </p>
+    <button onclick="showLesson()">
+      ابدأ الاختبار
+    </button>
+
+    <section id="lesson">
+      <h2>كيف تكتشف التصيّد؟</h2>
+      <p>١. افحص عنوان الموقع حرفًا بحرف.</p>
+      <p>٢. احذر الرسائل التي تضغط عليك للاستعجال.</p>
+      <p>٣. لا تشارك كلمات المرور أو رموز التحقق.</p>
+      <p>٤. افتح الموقع الرسمي بنفسك بدل الضغط على رابط مجهول.</p>
+      <button onclick="location.reload()">
+        إعادة الاختبار
+      </button>
+    </section>
+  </main>
+
+  <script>
+    function showLesson() {
+      document.getElementById("lesson").style.display = "block";
+    }
+  </script>
+</body>
+</html>
