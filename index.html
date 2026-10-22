@@ -3,79 +3,755 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مختبر التوعية بالتصيد الإلكتروني</title>
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="اختبر وعيك بالتصيد الإلكتروني وتعلم حماية حساباتك في تجربة تفاعلية آمنة.">
+  <title>CYBER AWARE | مختبر الأمن السيبراني</title>
+
   <style>
-    body {
+    :root {
+      --bg: #080d18;
+      --panel: #101a2b;
+      --panel2: #142238;
+      --green: #45f0a2;
+      --blue: #55b8ff;
+      --text: #f3f7ff;
+      --muted: #9baac0;
+      --border: rgba(151, 177, 210, .16);
+      --red: #ff697d;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f1f5f9;
-      color: #172033;
-      text-align: center;
-      padding: 20px;
+      padding: 0;
     }
-    .card {
-      max-width: 420px;
-      margin: 60px auto;
-      padding: 28px;
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 8px 30px #0001;
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse at 85% 5%, #12362d 0, transparent 35%),
+        radial-gradient(ellipse at 5% 45%, #101f3a 0, transparent 32%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.8;
     }
-    .tag {
-      color: #b45309;
-      background: #fef3c7;
-      padding: 8px 12px;
-      border-radius: 20px;
-      display: inline-block;
+
+    button { font: inherit; }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
     }
-    h1 { color: #166534; }
-    p { line-height: 1.9; }
-    button {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 10px;
-      background: #15803d;
-      color: white;
+
+    .container {
+      width: min(1080px, 92%);
+      margin: auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8, 13, 24, .75);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 14px;
+      color: var(--green);
+      background: #153a30;
+      border: 1px solid #28644d;
+      font-size: 23px;
+    }
+
+    .brand-name {
       font-size: 17px;
-      cursor: pointer;
+      font-weight: 900;
+      letter-spacing: 1px;
     }
-    #lesson {
-      display: none;
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--green);
+      font-size: 12px;
+      border: 1px solid #285842;
+      border-radius: 30px;
+      padding: 5px 12px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .hero {
+      padding: 72px 0 54px;
+      text-align: center;
+      animation: rise .7s ease both;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid #285842;
+      color: var(--green);
+      background: rgba(69, 240, 162, .06);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 7vw, 66px);
+      line-height: 1.3;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .gradient {
+      color: var(--green);
+      text-shadow: 0 0 35px rgba(69, 240, 162, .15);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .hero-art {
+      width: 150px;
+      height: 150px;
+      margin: 30px auto 24px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      border: 1px solid #285842;
+      border-radius: 42px;
+      background: linear-gradient(145deg, #18392f, #101a2b);
+      box-shadow: 0 0 65px rgba(69, 240, 162, .10);
+      transform: rotate(-4deg);
+    }
+
+    .hero-art span {
+      font-size: 76px;
+      transform: rotate(4deg);
+    }
+
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border: 1px solid rgba(69, 240, 162, .13);
+      border-radius: 49px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 24px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s, filter .2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+    .btn-primary {
+      background: var(--green);
+      color: #07150f;
+      box-shadow: 0 5px 28px rgba(69, 240, 162, .13);
+    }
+
+    .btn-secondary {
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .section { padding: 32px 0 65px; }
+
+    .section-title {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 26px;
+      font-size: 14px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 23px;
+      background: linear-gradient(145deg, #121e30, #0e1726);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .feature:hover {
+      border-color: #327654;
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 47px;
+      height: 47px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #18392f;
+      color: var(--green);
+      font-size: 23px;
+      margin-bottom: 17px;
+    }
+
+    .feature h3 { font-size: 17px; margin-bottom: 8px; }
+    .feature p { font-size: 13px; color: var(--muted); }
+
+    .quiz-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      background: rgba(16, 26, 43, .94);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(20px, 5vw, 38px);
+      box-shadow: 0 20px 70px #0002;
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress {
+      height: 6px;
+      background: #263248;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      transition: width .3s;
+    }
+
+    .question-tag {
+      color: var(--green);
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .question {
+      font-size: clamp(21px, 4vw, 27px);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .options {
+      display: grid;
+      gap: 11px;
+    }
+
+    .option {
       text-align: right;
+      padding: 15px 17px;
+      border: 1px solid var(--border);
+      background: #111e30;
+      color: var(--text);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .option:hover:not(:disabled) {
+      border-color: var(--green);
+      background: #172b2a;
+    }
+
+    .option:disabled { cursor: default; }
+
+    .option.correct {
+      border-color: var(--green);
+      background: #153629;
+    }
+
+    .option.wrong {
+      border-color: var(--red);
+      background: #38202c;
+    }
+
+    .feedback {
+      display: none;
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 18px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .feedback.show { display: block; }
+    .feedback.good { background: #153629; border: 1px solid #286b4b; }
+    .feedback.bad { background: #38202c; border: 1px solid #774052; }
+
+    .quiz-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
       margin-top: 22px;
+    }
+
+    .small-note { font-size: 12px; color: var(--muted); }
+
+    .result-score {
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--green);
+      line-height: 1.4;
+    }
+
+    .result-box { text-align: center; padding: 15px 0; }
+    .result-box h3 { font-size: 25px; margin-bottom: 8px; }
+    .result-box p { color: var(--muted); }
+
+    .tips {
+      display: grid;
+      gap: 13px;
+      margin-top: 22px;
+      text-align: right;
+    }
+
+    .tip {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 15px;
+      background: #111e30;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .tip-icon { color: var(--green); font-size: 20px; }
+    .tip p { color: var(--muted); font-size: 13px; }
+
+    .disclaimer {
+      border: 1px solid #314056;
+      background: rgba(20, 34, 56, .65);
+      padding: 18px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 28px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 27px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hidden { display: none !important; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      .features { grid-template-columns: 1fr; }
+      .hero { padding-top: 48px; }
+      .hero-art { width: 125px; height: 125px; }
+      .hero-art span { font-size: 62px; }
+      .status { font-size: 10px; padding: 5px 8px; }
+      .brand-name { font-size: 14px; }
+      .quiz-bottom { align-items: stretch; flex-direction: column; }
+      .quiz-bottom .btn { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
-<body>
-  <main class="card">
-    <span class="tag">تجربة توعوية آمنة</span>
-    <h1>هل تستطيع اكتشاف التصيّد؟</h1>
-    <p>
-      اختبر قدرتك على التعرّف على علامات الرسائل
-      والصفحات المشبوهة. هذه محاكاة تعليمية،
-      ولا تطلب أي كلمة مرور أو رمز تحقق.
-    </p>
-    <button onclick="showLesson()">
-      ابدأ الاختبار
-    </button>
 
-    <section id="lesson">
-      <h2>كيف تكتشف التصيّد؟</h2>
-      <p>١. افحص عنوان الموقع حرفًا بحرف.</p>
-      <p>٢. احذر الرسائل التي تضغط عليك للاستعجال.</p>
-      <p>٣. لا تشارك كلمات المرور أو رموز التحقق.</p>
-      <p>٤. افتح الموقع الرسمي بنفسك بدل الضغط على رابط مجهول.</p>
-      <button onclick="location.reload()">
-        إعادة الاختبار
-      </button>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">⬡</div>
+        <div>
+          <div class="brand-name">CYBER AWARE</div>
+          <div class="brand-sub">مختبر الوعي بالأمن السيبراني</div>
+        </div>
+      </div>
+      <div class="status">
+        <span class="status-dot"></span>
+        تجربة تعليمية آمنة
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <span class="eyebrow">✦ تعلّم · اختبر · احمِ نفسك</span>
+      <h1>
+        لا تثق بكل ما تراه.<br>
+        <span class="gradient">اكتشف الخدعة.</span>
+      </h1>
+      <p>
+        رسالة واحدة أو رابط واحد قد يكون بداية خدعة إلكترونية.
+        اختبر قدرتك على اكتشاف علامات التصيّد وتعلّم كيف تحمي
+        معلوماتك وحساباتك في تجربة تفاعلية قصيرة.
+      </p>
+
+      <div class="hero-art" aria-label="درع للحماية الرقمية">
+        <span aria-hidden="true">🛡️</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" onclick="startQuiz()">
+          ابدأ التحدي ←
+        </button>
+        <button class="btn btn-secondary" onclick="scrollToSection('learn')">
+          تعرّف على التصيّد
+        </button>
+      </div>
+    </section>
+
+    <section class="section container" id="learn">
+      <h2 class="section-title">اعرف عدوك الرقمي</h2>
+      <p class="section-desc">
+        ثلاث مهارات أساسية تساعدك على اكتشاف محاولات الاحتيال.
+      </p>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">⌁</div>
+          <h3>افحص الرابط</h3>
+          <p>
+            تحقق من اسم النطاق حرفًا بحرف. وجود رمز القفل أو HTTPS
+            وحده لا يثبت أن الموقع موثوق.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">⚠</div>
+          <h3>انتبه للاستعجال</h3>
+          <p>
+            رسائل مثل «سيُغلق حسابك فورًا» قد تهدف إلى دفعك
+            للتصرف قبل التفكير والتحقق.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon" aria-hidden="true">♧</div>
+          <h3>احمِ بياناتك</h3>
+          <p>
+            لا تشارك كلمة المرور أو رمز التحقق مع شخص يطلبهما
+            عبر رسالة أو صفحة مشبوهة.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section container" id="challenge">
+      <div class="quiz-wrap">
+        <div id="quizIntro">
+          <span class="eyebrow">المستوى الأول · مبتدئ</span>
+          <h2 class="section-title">اختبار الوعي الأمني</h2>
+          <p class="section-desc">
+            خمسة أسئلة قصيرة. اختر الإجابة الأفضل لتعرف
+            مدى قدرتك على اكتشاف محاولات التصيّد.
+          </p>
+          <button class="btn btn-primary" onclick="beginQuestions()">
+            ابدأ الاختبار الآن
+          </button>
+          <p class="small-note" style="margin-top:14px">
+            لا توجد حقول لتسجيل الدخول، ولا تُطلب أي بيانات شخصية.
+          </p>
+        </div>
+
+        <div id="quizArea" class="hidden">
+          <div class="quiz-top">
+            <span id="questionCounter">السؤال 1 من 5</span>
+            <span id="scoreCounter">النقاط: 0</span>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <div class="question-tag">اختر إجابة واحدة</div>
+          <h3 class="question" id="questionText"></h3>
+          <div class="options" id="options"></div>
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+
+          <div class="quiz-bottom">
+            <span class="small-note" id="hint">
+              خذ وقتك وفكّر قبل الاختيار.
+            </span>
+            <button id="nextButton" class="btn btn-primary hidden"
+              onclick="nextQuestion()">
+              السؤال التالي ←
+            </button>
+          </div>
+        </div>
+
+        <div id="resultArea" class="hidden">
+          <div class="result-box">
+            <div style="font-size:45px" aria-hidden="true">🏆</div>
+            <h3 id="resultTitle">أكملت الاختبار!</h3>
+            <div class="result-score" id="finalScore">0/5</div>
+            <p id="resultMessage"></p>
+          </div>
+
+          <div class="tips">
+            <div class="tip">
+              <span class="tip-icon">✓</span>
+              <div>
+                <strong>تحقق من المصدر</strong>
+                <p>افتح الموقع الرسمي بكتابة عنوانه بنفسك أو باستخدام تطبيقه الرسمي.</p>
+              </div>
+            </div>
+            <div class="tip">
+              <span class="tip-icon">✓</span>
+              <div>
+                <strong>لا تتسرع</strong>
+                <p>توقف عند التهديدات والجوائز غير المتوقعة والطلبات العاجلة.</p>
+              </div>
+            </div>
+            <div class="tip">
+              <span class="tip-icon">✓</span>
+              <div>
+                <strong>فعّل الحماية الإضافية</strong>
+                <p>استخدم المصادقة متعددة العوامل، ولا تشارك رموز التحقق مع أحد.</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary"
+            style="width:100%;margin-top:22px"
+            onclick="resetQuiz()">
+            ↻ أعد الاختبار
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="disclaimer">
+        <strong style="color:var(--green)">🔒 الخصوصية أولًا</strong>
+        <p style="margin-top:7px">
+          هذا المشروع نموذج توعوي مستقل. لا ينتحل هوية خدمة حقيقية،
+          ولا يطلب كلمات مرور أو أرقام هواتف أو رموز تحقق،
+          ولا يرسل إجابات الاختبار إلى خادم.
+        </p>
+      </div>
     </section>
   </main>
 
+  <footer>
+    <div class="container">
+      CYBER AWARE · تعلّم اليوم لتحمي نفسك غدًا
+      <br>
+      مشروع تعليمي للأمن السيبراني © <span id="year"></span>
+    </div>
+  </footer>
+
   <script>
-    function showLesson() {
-      document.getElementById("lesson").style.display = "block";
+    "use strict";
+
+    const questions = [
+      {
+        q: "وصلتك رسالة تقول: «سيتم إيقاف حسابك خلال 10 دقائق! اضغط هنا فورًا». ما أفضل تصرف؟",
+        options: [
+          "أضغط على الرابط فورًا",
+          "أتحقق من خلال التطبيق أو الموقع الرسمي",
+          "أرسل كلمة المرور إلى المرسل"
+        ],
+        answer: 1,
+        explanation: "الاستعجال والتهديد بإغلاق الحساب من أساليب الضغط الشائعة. تحقق عبر قناة رسمية مستقلة."
+      },
+      {
+        q: "وجدت رابطًا يشبه عنوان موقع مشهور، لكن اسم النطاق مكتوب بطريقة مختلفة قليلًا. ماذا تفعل؟",
+        options: [
+          "أثق به لأن الشعار يبدو صحيحًا",
+          "أدخل بياناتي لاختبار الموقع",
+          "أتجنب الرابط وأتحقق من العنوان الرسمي"
+        ],
+        answer: 2,
+        explanation: "قد تستخدم المواقع الاحتيالية أسماء قريبة من النطاق الأصلي لخداع الزوار. افحص اسم النطاق بعناية."
+      },
+      {
+        q: "صفحة تحتوي على HTTPS ورمز قفل. هل هذا يعني بالضرورة أنها موثوقة؟",
+        options: [
+          "نعم، كل موقع HTTPS آمن وموثوق",
+          "لا، التشفير لا يثبت هوية الموقع أو نزاهته",
+          "نعم، إذا كانت ألوان الصفحة جميلة"
+        ],
+        answer: 1,
+        explanation: "HTTPS يساعد على تشفير الاتصال، لكنه لا يضمن أن الموقع شرعي أو أن صاحبه حسن النية."
+      },
+      {
+        q: "شخص يطلب منك رمز التحقق الذي وصلك برسالة حتى «يساعدك» في تسجيل الدخول. ما القرار الصحيح؟",
+        options: [
+          "أشاركه الرمز إذا كان مستعجلًا",
+          "أرسل له صورة شاشة الرسالة",
+          "لا أشاركه الرمز وأتحقق من الطلب عبر القناة الرسمية"
+        ],
+        answer: 2,
+        explanation: "رموز التحقق قد تسمح بإتمام تسجيل الدخول أو تغيير إعدادات الحساب. لا تشاركها مع الآخرين."
+      },
+      {
+        q: "وصلتك رسالة غير متوقعة تحتوي على مرفق. ما التصرف الأكثر أمانًا؟",
+        options: [
+          "أفتح المرفق فورًا",
+          "أتحقق من المرسل وسبب الإرسال قبل فتحه",
+          "أعطل الحماية كي يفتح الملف"
+        ],
+        answer: 1,
+        explanation: "تحقق من هوية المرسل عبر وسيلة مستقلة، ولا تفتح المرفقات المشبوهة أو تعطل أدوات الحماية."
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    const $ = id => document.getElementById(id);
+
+    $("year").textContent = new Date().getFullYear();
+
+    function scrollToSection(id) {
+      $(id).scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  </script>
-</body>
-</html>
+
+    function startQuiz() {
+      scrollToSection("challenge");
+    }
+
+    function beginQuestions() {
+      current = 0;
+      score = 0;
+      $("quizIntro").classList.add("hidden");
+      $("resultArea").classList.add("hidden");
+      $("quizArea").classList.remove("hidden");
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const item = questions[current];
+
+      $("questionCounter").textContent =
+        `السؤال ${current + 1} من ${questions.length}`;
+      $("scoreCounter").textContent = `النقاط: ${score}`;
+      $("progressBar").style.width =
+        `${(current / questions.length) * 100}%`;
+      $("questionText").textContent = item.q;
+      $("hint").textContent = "خذ وقتك وفكّر قبل الاختيار.";
+
+      $("feedback").className = "feedback";
+      $("feedback").textContent = "";
+      $("nextButton").classList.add("hidden");
+
+      const options = $("options");
+      options.replaceChildren();
+
+      item.options.forEach((label, index) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = label;
+        button.addEventListener("click", () => chooseAnswer(index));
+        options.appendChild(button);
+      });
+    }
+
+    function chooseAnswer(selected) {
+      if (answered) return;
+      answered = true;
+
+      const item = questions[current];
+      const buttons = $("options").querySelectorAll("button");
+      const correct = selected === item.answer;
+
+      if (correct) score++;
+
+      buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === item.answer) button.classList.add("correct");
+        if (index === selected && !correct) button.classList.add("wrong");
+      });
+
+      const feedback = $("feedback");
+      feedback.className = `feedback show ${correct ? "good" : "bad"}`;
+      feedback.textContent =
+        `${correct ? "إجابة صحيحة! ✓" : "ليست الإجابة الصحيحة."} ${item.explanation}`;
+
+      $("scoreCounter").textContent = `النقاط: ${score}`;
+      $("hint").textContent = "اقرأ التفسير قبل الانتقال للسؤال التالي.";
+
+      $("nextButton").textContent =
+        current === questions.length - 1
+        
